@@ -36,26 +36,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     <div class="row">
       <div class="col-md-6">
-            <form method="post">
-                <div class="mb-3">
-                    <select name="competition" class="form-select">
-                        <?php foreach ($competitions as $code => $comp): ?>
-                            <option value="<?= $code ?>"><?= $comp['name'] ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Carregar Jogos</button>
-            </form>
-        </div>
-        
-        <div class="col-md-6">
-            <form method="post">
-                <div class="input-group">
-                    <input type="text" name="team_name" class="form-control" placeholder="Buscar time...">
-                    <button type="submit" name="team_search" class="btn btn-success">Buscar</button>
-                </div>
-            </form>
-        </div>
+        <form method="post">
+          <div class="mb-3">
+            <select name="competition" class="form-select">
+              <?php foreach ($competitions as $key => $value): ?>
+                <option value="<?= $key ?>">
+                  <?= $value['name'] ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Carregar Jogos</button>
+        </form>
+      </div>
+      
+      <div class="col-md-6">
+        <form method="post">
+          <div class="input-group">
+            <input type="text" name="team_name" class="form-control" placeholder="Buscar time...">
+            <button type="submit" name="team_search" class="btn btn-success">Buscar</button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <?php if ($error): ?>
