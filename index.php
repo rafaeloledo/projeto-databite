@@ -25,15 +25,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informações de Futebol</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body class="container mt-5">
     <h1 class="mb-4">Sistema de Jogos de Futebol ⚽</h1>
-    
+
     <div class="row">
       <div class="col-md-6">
         <form method="post">
@@ -65,58 +67,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
 
     <?php if ($selectedComp): ?>
-        <h2 class="mt-5"><?= $selectedComp['name'] ?></h2>
-        
-        <div class="row mt-4">
-            <div class="col-md-6">
-                <h4>Próximos Jogos</h4>
-                <?php $matches = getNextMatches($selectedComp['id']); ?>
-                <?php if ($matches): ?>
-                    <?php foreach ($matches as $match): ?>
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <?= $match['homeTeam']['name'] ?> vs <?= $match['awayTeam']['name'] ?>
-                                </h5>
-                                <p class="card-text">
-                                    <?= (new DateTime($match['utcDate']))->format('d/m/Y H:i') ?>
-                                    <?php if ($match['venue']): ?>
-                                        <br><small><?= $match['venue'] ?></small>
-                                    <?php endif; ?>
-                                </p>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <div class="alert alert-info">Nenhum jogo agendado</div>
-                <?php endif; ?>
-            </div>
+      <h2 class="mt-5"><?= $selectedComp['name'] ?></h2>
+      
+      <div class="row mt-4">
+          <div class="col-md-6">
+              <h4>Próximos Jogos</h4>
+              <?php $matches = getNextMatches($selectedComp['id']); ?>
+              <?php if ($matches): ?>
+                  <?php foreach ($matches as $match): ?>
+                      <div class="card mb-3">
+                          <div class="card-body">
+                              <h5 class="card-title">
+                                  <?= $match['homeTeam']['name'] ?> vs <?= $match['awayTeam']['name'] ?>
+                              </h5>
+                              <p class="card-text">
+                                  <?= (new DateTime($match['utcDate']))->format('d/m/Y H:i') ?>
+                                  <?php if ($match['venue']): ?>
+                                      <br><small><?= $match['venue'] ?></small>
+                                  <?php endif; ?>
+                              </p>
+                          </div>
+                      </div>
+                  <?php endforeach; ?>
+              <?php else: ?>
+                  <div class="alert alert-info">Nenhum jogo agendado</div>
+              <?php endif; ?>
+          </div>
 
-            <div class="col-md-6">
-                <h4>Últimos Resultados</h4>
-                <?php $results = getLatestResults($selectedComp['id']); ?>
-                <?php if ($results): ?>
-                    <?php foreach ($results as $match): ?>
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <?= $match['homeTeam']['name'] ?> 
-                                    <span class="badge bg-primary">
-                                        <?= $match['score']['fullTime']['home'] ?? '-' ?>x<?= $match['score']['fullTime']['away'] ?? '-' ?>
-                                    </span>
-                                    <?= $match['awayTeam']['name'] ?>
-                                </h5>
-                                <p class="card-text">
-                                    <?= (new DateTime($match['utcDate']))->format('d/m/Y') ?>
-                                </p>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <div class="alert alert-info">Nenhum resultado recente</div>
-                <?php endif; ?>
-            </div>
+        <div class="col-md-6">
+          <h4>Últimos Resultados</h4>
+          <?php $results = getLatestResults($selectedComp['id']); ?>
+          <?php if ($results): ?>
+            <?php foreach ($results as $match): ?>
+              <div class="card mb-3">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <?= $match['homeTeam']['name'] ?> 
+                    <span class="badge bg-primary">
+                        <?= $match['score']['fullTime']['home'] ?? '-' ?>x<?= $match['score']['fullTime']['away'] ?? '-' ?>
+                    </span>
+                    <?= $match['awayTeam']['name'] ?>
+                  </h5>
+                  <p class="card-text">
+                    <?= (new DateTime($match['utcDate']))->format('d/m/Y') ?>
+                  </p>
+                </div>
+              </div>
+            <?php endforeach; ?>
+          <?php else: ?>
+              <div class="alert alert-info">Nenhum resultado recente</div>
+          <?php endif; ?>
         </div>
+      </div>
     <?php endif; ?>
 
     <?php if ($teamData): ?>
@@ -170,4 +172,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
 </body>
 </html>
-?>
+
